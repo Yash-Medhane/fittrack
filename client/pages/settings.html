@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings | FitTrack</title>
+  <link rel="stylesheet" href="../style/navbar.css" />
+  <link rel="stylesheet" href="../style/sidebar.css" />
+  <link rel="stylesheet" href="../style/main.css" />
+  <link rel="stylesheet" href="../style/settings.css" />
+  <style>
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 15px 0;
+      background: #e5e7eb;
+      color: #0f172a;
+      font-size: 0.9rem;
+      border-top: 1px solid #1e293b;
+    }
+    footer span {
+      color: #38bdf8;
+      font-weight: 600;
+    }
+    .settings-card p.purpose {
+      background: #f0f9ff;
+      border-left: 4px solid #38bdf8;
+      padding: 10px 14px;
+      border-radius: 6px;
+      line-height: 1.5;
+      color: #0f172a;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="navbar-container"></div>
+
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <div class="profile">
+        <img src="https://cdn-icons-png.flaticon.com/512/5148/5148324.png" alt="Profile" />
+        <p class="username">Yash Medhane</p>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="workouts.html">Workouts</a>
+        <a href="nutrition.html">Nutrition</a>
+        <a href="profile.html">Profile</a>
+        <a href="settings.html" class="active">Settings</a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <section>
+        <h2>Settings ⚙️</h2>
+        <p>Manage app preferences & account settings here.</p>
+
+        <!-- Admin Button -->
+        <button id="adminBtn" class="admin-btn">Login as Admin</button>
+      </section>
+
+      <section class="settings-section">
+        <div class="settings-card">
+          <h3>App Preferences</h3>
+          <p class="purpose">
+            <strong>FitTrack</strong> is a personal fitness tracking web app designed to help users monitor daily health activities like calories, steps, sleep, and workouts — making it easier to stay consistent and achieve long-term fitness goals.
+          </p>
+        </div>
+
+        <div class="settings-card">
+          <h3>Account</h3>
+          <p>When you log out, your session will end, and you’ll need to sign in again to access your fitness dashboard.</p>
+          <button id="logout-btn" class="logout-btn">Logout</button>
+        </div>
+      </section>
+
+      <footer>
+        © <span>FitTrack</span> 2025. All rights reserved.
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    // Load navbar
+    fetch("components/navbar.html")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("navbar-container").innerHTML = data;
+      });
+
+    // Redirects
+    document.getElementById("adminBtn").addEventListener("click", () => {
+      window.location.href = "admin-login.html";
+    });
+    document.getElementById("logout-btn").addEventListener("click", () => {
+      window.location.href = "../index.html";
+    });
+  </script>
+
+</body>
+</html>

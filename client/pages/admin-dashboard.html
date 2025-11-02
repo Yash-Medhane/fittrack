@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard | FitTrack</title>
+
+  <link rel="stylesheet" href="../style/navbar.css" />
+  <link rel="stylesheet" href="../style/sidebar.css" />
+  <link rel="stylesheet" href="../style/main.css" />
+  <link rel="stylesheet" href="../style/admin.css" />
+</head>
+<body>
+  <div id="navbar-container"></div>
+
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <div class="profile">
+        <img src="https://cdn-icons-png.flaticon.com/512/5148/5148324.png" alt="Admin" />
+        <p class="username">Admin</p>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="admin-dashboard.html" class="active">Profiles</a>
+        <a href="workouts.html">Workouts</a>
+        <a href="nutrition.html">Nutrition</a>
+        <a href="settings.html">Settings</a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <section>
+        <h2>All User Profiles 👥</h2>
+        <input type="text" id="searchBar" placeholder="Search by name or email..." class="search-bar" />
+        <div id="profilesContainer" class="profiles-container">Loading profiles...</div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Popup Modal -->
+  <div id="userModal" class="modal">
+    <div class="modal-content">
+      <span id="closeModal" class="close">&times;</span>
+      <div id="userDetails"></div>
+    </div>
+  </div>
+
+  <script>
+    // Load Navbar
+    fetch("components/navbar.html")
+      .then(res => res.text())
+      .then(data => (document.getElementById("navbar-container").innerHTML = data));
+
+    // Fetch profiles
+    async function fetchProfiles() {
+      try {
+        const res = await fetch("http://localhost:3000/api/profiles");
+        const data = await res.json();
+
+        if (!data.success || !Array.isArray(data.profiles)) {
+          throw new Error("Invalid response format");
+        }
+
+        allProfiles = data.profiles;
+        renderProfiles(allProfiles);
+      } catch (error) {
+        console.error("Error fetching profiles:", error);
+        document.getElementById("profilesContainer").innerHTML =
+          "<p>Unable to load profiles.</p>";
+      }
+    }
+
+    function renderProfiles(profilesList) {
+      const container = document.getElementById("profilesContainer");
+      container.innerHTML = "";
+
+      if (profilesList.length === 0) {
+        container.innerHTML = "<p>No profiles found.</p>";
+        return;
+      }
+
+      profilesList.forEach((p) => {
+        const card = document.createElement("div");
+        card.classList.add("profile-card");
+        card.innerHTML = `
+          <div class="profile-header">
+            <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="User">
+            <h3>${p.fullName || "Unknown User"}</h3>
+            <p>${p.email || "Not provided"}</p>
+          </div>
+          <div class="profile-info">
+            <p><b>Goal:</b> ${p.goal}</p>
+            <p><b>Gender:</b> ${p.gender}</p>
+          </div>
+          <button class="view-btn" data-id="${p._id}">View</button>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // Modal Logic
+    const modal = document.getElementById("userModal");
+    const modalContent = document.getElementById("userDetails");
+    const closeModal = document.getElementById("closeModal");
+
+    document.addEventListener("click", (e) => {
+      if (e.target.classList.contains("view-btn")) {
+        const id = e.target.dataset.id;
+        const user = allProfiles.find((u) => u._id === id);
+        if (user) openModal(user);
+      }
+    });
+
+    closeModal.onclick = () => (modal.style.display = "none");
+    window.onclick = (e) => {
+      if (e.target === modal) modal.style.display = "none";
+    };
+
+    function openModal(user) {
+      modal.style.display = "flex";
+      modalContent.innerHTML = `
+        <h2>${user.fullName}</h2>
+        <p><b>Email:</b> ${user.email}</p>
+        <p><b>Phone:</b> ${user.phone || "N/A"}</p>
+        <p><b>Date of Birth:</b> ${
+          user.dateOfBirth ? new Date(user.dateOfBirth).toDateString() : "N/A"
+        }</p>
+        <p><b>Gender:</b> ${user.gender}</p>
+        <p><b>Height:</b> ${user.height} cm</p>
+        <p><b>Weight:</b> ${user.weight} kg</p>
+        <p><b>Goal:</b> ${user.goal}</p>
+        <p><b>Activity Level:</b> ${user.activityLevel}</p>
+        <p><b>Dietary Preference:</b> ${user.dietaryPreference}</p>
+        <p><b>Bio:</b> ${user.bio}</p>
+        <hr>
+        <h3>Targets 🎯</h3>
+        <p>Calories: ${user.targets.calories}</p>
+        <p>Protein: ${user.targets.protein}</p>
+        <p>Carbs: ${user.targets.carbs}</p>
+        <p>Fats: ${user.targets.fats}</p>
+        <p>Water: ${user.targets.water} ml</p>
+        <p>Steps: ${user.targets.steps}</p>
+        <p>Sleep: ${user.targets.sleep} hrs</p>
+      `;
+    }
+
+    // Search Filter
+    const searchBar = document.getElementById("searchBar");
+    let allProfiles = [];
+
+    searchBar.addEventListener("input", (e) => {
+      const q = e.target.value.toLowerCase();
+      const filtered = allProfiles.filter(
+        (u) =>
+          u.fullName.toLowerCase().includes(q) ||
+          (u.email && u.email.toLowerCase().includes(q))
+      );
+      renderProfiles(filtered);
+    });
+
+    fetchProfiles();
+  </script>
+</body>
+</html>

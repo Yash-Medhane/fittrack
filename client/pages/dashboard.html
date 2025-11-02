@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fitness Dashboard</title>
+  <link rel="stylesheet" href="../style/navbar.css" />
+  <link rel="stylesheet" href="../style/sidebar.css" />
+  <link rel="stylesheet" href="../style/main.css" />
+  <link rel="stylesheet" href="../style/dashboard.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <div id="navbar-container"></div>
+
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <div class="profile">
+        <img src="https://cdn-icons-png.flaticon.com/512/5148/5148324.png" alt="Profile" />
+        <p id="sidebarUsername" class="username">User</p>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="active">Dashboard</a>
+        <a href="workouts.html">Workouts</a>
+        <a href="nutrition.html">Nutrition</a>
+        <a href="profile.html">Profile</a>
+        <a href="settings.html">Settings</a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <section class="greeting">
+        <h2>Welcome Back!</h2>
+        <p>Let’s get your fitness journey going 💪</p>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    fetch("components/navbar.html")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("navbar-container").innerHTML = data;
+      });
+  </script>
+
+  <script src="../script/dashboard.js"></script>
+</body>
+</html>

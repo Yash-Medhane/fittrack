@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FitTrack - Fitness Website</title>
+  <link rel="stylesheet" href="style/index.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="logo">FitTrack</div>
+    <nav class="nav">
+      <button onclick="redirectTo('register')" class="btn">Register</button>
+      <button onclick="redirectTo('login')" class="btn">Login</button>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Your Fitness Journey Starts Here</h1>
+    <p>Track your workouts, diet, progress & more — all in one place.</p>
+    <button onclick="redirectTo('login')" class="btn primary">Get Started</button>
+  </section>
+
+  <section class="features">
+    <h2>Core Features</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/3456/3456477.png" alt="Diet Planning" />
+        <h3>Diet Planning</h3>
+        <p>Keep track of your daily nutrition and calories.</p>
+      </div>
+      <div class="feature-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/2920/2920143.png" alt="Progress Tracker" />
+        <h3>Progress Tracker</h3>
+        <p>Visualize your fitness journey with graphs and logs.</p>
+      </div>
+      <div class="feature-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/16139/16139726.png" alt="Personal Dashboard" />
+        <h3>Personal Dashboard</h3>
+        <p>Overview of your fitness routine in one place.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>© 2025 FitTrack. All rights reserved. | Developed by yash</p>
+  </footer>
+
+  <script src="script/index.js"></script>
+</body>
+</html>

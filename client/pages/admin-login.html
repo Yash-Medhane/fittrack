@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login | FitTrack</title>
+  <link rel="stylesheet" href="../style/admin.css" />
+</head>
+<body>
+
+  <div class="admin-login-container">
+    <h2>Admin Login</h2>
+    <input type="text" id="adminUser" placeholder="Admin Username" />
+    <input type="password" id="adminPass" placeholder="Password" />
+    <button id="loginBtn">Login</button>
+    <p id="errorMsg"></p>
+  </div>
+
+  <script>
+    document.getElementById("loginBtn").addEventListener("click", () => {
+      const user = document.getElementById("adminUser").value;
+      const pass = document.getElementById("adminPass").value;
+
+      // Dummy
+      if (user === "admin" && pass === "admin123") {
+        window.location.href = "admin-dashboard.html";
+      } else {
+        document.getElementById("errorMsg").textContent = "Invalid credentials!";
+      }
+    });
+  </script>
+</body>
+</html>

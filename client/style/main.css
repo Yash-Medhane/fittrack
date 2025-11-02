@@ -1,0 +1,57 @@
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f1f5f9;
+}
+
+.dashboard-container {
+  display: flex;
+  margin-top: 65px; /* space for navbar */
+}
+
+.main-content {
+  flex: 1;
+  margin-left: 220px; /* space for sidebar */
+  padding: 2rem;
+  min-height: calc(100vh - 65px);
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+.main-content h2 {
+  color: #0f172a;
+  margin-bottom: 0.5rem;
+}
+
+.main-content p {
+  color: #334155;
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+  }
+}
+
+.progress-dashboard {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 1rem;
+}
+
+canvas {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 1rem;
+}
+
+
+

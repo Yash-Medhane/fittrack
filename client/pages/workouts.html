@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Workouts | FitTrack</title>
+  <link rel="stylesheet" href="../style/navbar.css" />
+  <link rel="stylesheet" href="../style/sidebar.css" />
+  <link rel="stylesheet" href="../style/main.css" />
+  <link rel="stylesheet" href="../style/workout.css" />
+</head>
+<body>
+
+  <div id="navbar-container"></div>
+
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      
+        <div class="profile">
+          <img src="https://cdn-icons-png.flaticon.com/512/5148/5148324.png" alt="Profile" />
+          <p class="username">Yash Medhane</p>
+        </div>
+      
+      <nav class="sidebar-nav">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="workouts.html" class="active">Workouts</a>
+        <a href="nutrition.html">Nutrition</a>
+        <a href="profile.html">Profile</a>
+        <a href="settings.html">Settings</a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <section>
+        <h2>Your Workout Plans 🏋️</h2>
+        <p>Track, update, and monitor your daily workouts here.</p>
+      </section>
+    </main>
+  </div>
+
+  <script>fetch("components/navbar.html")
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById("navbar-container").innerHTML = data;
+  });</script>
+  <script src="../script/workout.js"></script>
+</body>
+</html>
