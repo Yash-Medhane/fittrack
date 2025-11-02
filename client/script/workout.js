@@ -1,9 +1,14 @@
+const BASE_URL =
+  window.location.hostname === "localhost"
+    ? "http://localhost:3000"
+    : "https://fittrack-server-nitx.onrender.com";
+
 document.addEventListener("DOMContentLoaded", async () => {
   const mainContent = document.querySelector(".main-content");
 
   async function fetchWorkouts() {
     try {
-      const res = await fetch("http://localhost:3000/api/workouts");
+      const res = await fetch(`${BASE_URL}/api/workouts`);
       const data = await res.json();
       console.log(data);
 

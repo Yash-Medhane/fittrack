@@ -1,3 +1,9 @@
+const BASE_URL =
+  window.location.hostname === "localhost"
+    ? "http://localhost:3000"
+    : "https://fittrack-server-nitx.onrender.com";
+
+
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.querySelector('form');
   const emailInput = document.querySelector('input[type="email"]');
@@ -23,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     try {
-      const response = await fetch('http://localhost:3000/api/users/login', {
+      const response = await fetch(`${BASE_URL}/api/users/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })

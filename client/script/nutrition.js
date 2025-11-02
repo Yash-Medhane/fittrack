@@ -1,3 +1,8 @@
+const BASE_URL =
+  window.location.hostname === "localhost"
+    ? "http://localhost:3000"
+    : "https://fittrack-server-nitx.onrender.com";
+
 document.addEventListener("DOMContentLoaded", async () => {
   const cardContainer = document.getElementById("cardContainer");
   const searchInput = document.getElementById("searchInput");
@@ -5,7 +10,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Fetch data from backend
   async function fetchNutritionData() {
     try {
-      const res = await fetch("http://localhost:3000/api/nutrition");
+      const res = await fetch(`${BASE_URL}/api/nutrition`);
       const data = await res.json();
 
       if (!res.ok || !data.nutrition) throw new Error("Failed to load");
@@ -55,7 +60,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Handle search
   searchInput.addEventListener("input", async (e) => {
-    const res = await fetch("http://localhost:3000/api/nutrition");
+    const res = await fetch(`${BASE_URL}/api/nutrition`);
     const data = await res.json();
     renderCards(data.nutrition, e.target.value);
   });

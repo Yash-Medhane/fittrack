@@ -51,10 +51,16 @@
       .then(res => res.text())
       .then(data => (document.getElementById("navbar-container").innerHTML = data));
 
+      const BASE_URL =
+  window.location.hostname === "localhost"
+    ? "http://localhost:3000"
+    : "https://fittrack-server-nitx.onrender.com";
+
+
     // Fetch profiles
     async function fetchProfiles() {
       try {
-        const res = await fetch("http://localhost:3000/api/profiles");
+        const res = await fetch(`${BASE_URL}/api/profiles`);
         const data = await res.json();
 
         if (!data.success || !Array.isArray(data.profiles)) {

@@ -1,3 +1,9 @@
+const BASE_URL =
+  window.location.hostname === "localhost"
+    ? "http://localhost:3000"
+    : "https://fittrack-server-nitx.onrender.com";
+
+
 document.addEventListener('DOMContentLoaded', async () => {
   const main = document.querySelector('.main-content');
   const userId = localStorage.getItem('userId');
@@ -57,7 +63,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Fetch Profile
   async function loadProfile() {
     try {
-      const res = await fetch(`http://localhost:3000/api/profile/${userId}`);
+      const res = await fetch(`${BASE_URL}/api/profile/${userId}`);
       const data = await res.json();
       if (!res.ok) throw new Error(data.message);
       profileData = data.profile;
@@ -207,7 +213,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
 
     try {
-      const res = await fetch(`http://localhost:3000/api/progress/${userId}`, {
+      const res = await fetch(`${BASE_URL}/api/progress/${userId}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(progressData),
@@ -257,7 +263,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
 
     try {
-      const res = await fetch(`http://localhost:3000/api/target/${userId}`, {
+      const res = await fetch(`${BASE_URL}/api/target/${userId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ targets: newTargets }),

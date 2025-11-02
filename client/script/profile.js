@@ -1,3 +1,8 @@
+const BASE_URL =
+  window.location.hostname === "localhost"
+    ? "http://localhost:3000"
+    : "https://fittrack-server-nitx.onrender.com";
+
 document.addEventListener("DOMContentLoaded", async () => {
   const usernameEl = document.querySelector(".username");
   const mainContent = document.querySelector(".main-content");
@@ -13,7 +18,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   usernameEl.textContent = userName || "User";
 
   try {
-    const res = await fetch(`http://localhost:3000/api/profile/${userId}`);
+    const res = await fetch(`${BASE_URL}/api/profile/${userId}`);
     const data = await res.json();
 
     if (!res.ok) throw new Error(data.message || "Unable to fetch profile");
@@ -111,7 +116,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       };
 
       try {
-        const updateRes = await fetch(`http://localhost:3000/api/profile/${userId}`, {
+        const updateRes = await fetch(`${BASE_URL}/api/profile/${userId}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(updatedProfile),
