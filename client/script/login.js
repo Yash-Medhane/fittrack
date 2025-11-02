@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('userName', data.user.name);
         localStorage.setItem('userEmail', data.user.email);
 
-        window.location.href = '/client/pages/dashboard.html';
+        window.location.href = '/pages/dashboard.html';
       }else {
         alert(`❌ ${data.message || 'Login failed'}`);
       }
